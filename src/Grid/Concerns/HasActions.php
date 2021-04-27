@@ -80,6 +80,14 @@ trait HasActions
     }
 
     /**
+     * [setActionsColumnFirst 将表格操作列前置]
+     */
+    public function setActionsColumnFirst()
+    {
+        return $this->option('actions_column_position', 'first');
+    }
+
+    /**
      * Set grid batch-action callback.
      *
      * @param Closure $closure
@@ -120,5 +128,21 @@ trait HasActions
 
         $this->addColumn(Grid\Column::ACTION_COLUMN_NAME, trans('admin.action'))
             ->displayUsing($this->getActionClass(), [$this->actionsCallback]);
+    }
+
+    /**
+     * prepend `actions` column for grid.
+     *
+     * @return void
+     */
+    protected function prependActionsColumn()
+    {
+        if (!$this->option('show_actions')) {
+            return;
+        }
+
+        $this->prependColumn(Grid\Column::ACTION_COLUMN_NAME, trans('admin.action'))
+            ->displayUsing($this->getActionClass(), [$this->actionsCallback]);
+
     }
 }

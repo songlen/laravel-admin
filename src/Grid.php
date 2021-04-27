@@ -152,6 +152,7 @@ class Grid
         'show_column_selector'   => true,
         'show_define_empty_page' => true,
         'show_perpage_selector'  => true,
+        'actions_column_position' => 'last'
     ];
 
     /**
@@ -542,7 +543,8 @@ class Grid
     {
         $this->prependRowSelectorColumn();
 
-        $this->appendActionsColumn();
+        if ($this->options['actions_column_position'] === 'last') $this->appendActionsColumn();
+        if ($this->options['actions_column_position'] === 'first') $this->prependActionsColumn();
     }
 
     /**
