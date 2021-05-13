@@ -8,17 +8,17 @@ class BelongsTo extends Select
 {
     use BelongsToRelation;
 
-     // 附加请求参数
-    protected $args = [];
+    // 附加请求参数
+    protected $parameters = [];
 
     /**
      *  通过此方法可以向请求连接传入参数
      * @param array $args
      * @return $this
      */
-    public function setArgs(array $args)
+    public function setParameters(array $parameters)
     {
-        $this->args = $args;
+        $this->parameters = $parameters;
 
         return $this;
     }
@@ -87,7 +87,7 @@ class BelongsTo extends Select
     };
 
     modal.on('show.bs.modal', function (e) {
-        load("{$this->getLoadUrl($this->args)}");
+        load("{$this->getLoadUrl($this->parameters)}");
     }).on('click', '.page-item a, .filter-box a', function (e) {
         load($(this).attr('href'));
         e.preventDefault();
