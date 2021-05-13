@@ -8,6 +8,21 @@ class BelongsTo extends Select
 {
     use BelongsToRelation;
 
+     // 附加请求参数
+    protected $args = [];
+
+    /**
+     *  通过此方法可以向请求连接传入参数
+     * @param array $args
+     * @return $this
+     */
+    public function setArgs(array $args)
+    {
+        $this->args = $args;
+
+        return $this;
+    }
+
     protected function addScript()
     {
         $script = <<<SCRIPT
@@ -72,7 +87,7 @@ class BelongsTo extends Select
     };
 
     modal.on('show.bs.modal', function (e) {
-        load("{$this->getLoadUrl()}");
+        load("{$this->getLoadUrl($this->args)}");
     }).on('click', '.page-item a, .filter-box a', function (e) {
         load($(this).attr('href'));
         e.preventDefault();
@@ -87,7 +102,7 @@ class BelongsTo extends Select
         selected = $(this).val();
     }).find('.modal-footer .submit').click(function () {
         update(function () {
-            modal.modal('toggle');
+            modal.modal('hide');
         });
     });
 })();
