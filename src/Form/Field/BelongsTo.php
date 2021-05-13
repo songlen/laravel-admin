@@ -87,7 +87,7 @@ class BelongsTo extends Select
     };
 
     modal.on('show.bs.modal', function (e) {
-        load("{$this->getLoadUrl($this->parameters)}");
+        load("{$this->getLoadUrl(false, $this->parameters)}");
     }).on('click', '.page-item a, .filter-box a', function (e) {
         load($(this).attr('href'));
         e.preventDefault();
